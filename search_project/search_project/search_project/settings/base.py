@@ -44,14 +44,23 @@ MANAGERS = ADMINS
 ########## DATABASE CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#databases
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.',
+    #     'NAME': '',
+    #     'USER': '',
+    #     'PASSWORD': '',
+    #     'HOST': '',
+    #     'PORT': '',
+    # }
     'default': {
-        'ENGINE': 'django.db.backends.',
-        'NAME': '',
+        'ENGINE': 'django_elasticsearch',
+        'NAME': 'test',
         'USER': '',
         'PASSWORD': '',
-        'HOST': '',
-        'PORT': '',
-    }
+        'HOST': 'localhost',
+        'PORT': '9200',
+        'SUPPORTS_TRANSACTIONS': False,
+    },
 }
 ########## END DATABASE CONFIGURATION
 
@@ -249,3 +258,5 @@ INSTALLED_APPS += (
 # Don't need to use South when setting up a test database.
 SOUTH_TESTS_MIGRATE = False
 ########## END SOUTH CONFIGURATION
+
+ELASTICSEARCH_MANAGED_APPS = ['search_project.base', ]
