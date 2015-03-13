@@ -53,9 +53,13 @@ DATABASES = {
     #     'PORT': '',
     # }
     'default': {
-        'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
-        'URL': 'http://127.0.0.1/9200/',
-        'INDEX_NAME': 'haystack',
+        'ENGINE': 'django_elasticsearch',
+        'NAME': 'test',
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+        'PORT': '9200',
+        'SUPPORTS_TRANSACTIONS': False,
     },
 }
 ########## END DATABASE CONFIGURATION
@@ -257,3 +261,11 @@ SOUTH_TESTS_MIGRATE = False
 ########## END SOUTH CONFIGURATION
 
 ELASTICSEARCH_MANAGED_APPS = ['search_project.base', ]
+
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
+        'URL': 'http://127.0.0.1:9200/',
+        'INDEX_NAME': 'haystack',
+    },
+}
