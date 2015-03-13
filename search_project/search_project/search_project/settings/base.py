@@ -53,13 +53,9 @@ DATABASES = {
     #     'PORT': '',
     # }
     'default': {
-        'ENGINE': 'django_elasticsearch',
-        'NAME': 'test',
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': 'localhost',
-        'PORT': '9200',
-        'SUPPORTS_TRANSACTIONS': False,
+        'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
+        'URL': 'http://127.0.0.1/9200/',
+        'INDEX_NAME': 'haystack',
     },
 }
 ########## END DATABASE CONFIGURATION
@@ -203,6 +199,7 @@ DJANGO_APPS = (
 
 # Apps specific for this project go here.
 LOCAL_APPS = (
+    'haystack',
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
