@@ -11,30 +11,36 @@
 {% endblock extra_css %}
 
 {% block content %}
-
+    {{ form.media }}
     <h2>Search</h2>
 
     <form method="get" action=".">
+    <!--<form method="post" action="/search/">-->
+        <!--{% csrf_token %}-->
         <table>
-            <!--{{ form.as_table }}-->
+            {{ form }}
             <tr>
                 <td>&nbsp;</td>
                 <td>
-                    <select data-placeholder="User..." class="chosen-select" style="width:350px;" tabindex="2">
-                        <option value="Brazil">Brazil</option>
-                        <option value="USA">USA</option>
-                    </select>
-                    <!--<input type="submit", value="Search">-->
+                    <!--&lt;!&ndash;<select data-placeholder="User..." class="chosen-select" style="width:350px;" tabindex="2">&ndash;&gt;-->
+                        <!--&lt;!&ndash;<option value="Brazil">Brazil</option>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<option value="USA">USA</option>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</select>&ndash;&gt;-->
+                    <input type="submit", value="Search">
                 </td>
             </tr>
         </table>
+
+        <!--<input type="text" id="id_q" name="q">-->
+        <!--<input type="submit" value="Search!">-->
+
 
         {% if query %}
             <h3>Results</h3>
 
             {% for result in page.object_list %}
                 <p>
-                    <a href="{{ result.object.get_absolute_url }}">{{ result.object.title }}</a>
+                    <a href="{{ result.object.get_absolute_url }}">{{ result.object.user_name }}</a>
                 </p>
             {% empty %}
                 <p>No results.</p>

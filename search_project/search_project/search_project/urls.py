@@ -21,6 +21,7 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
 
     url(r'^search/', include('haystack.urls')),
+    url(r'^select2/', include('select2.urls')),
 )
 
 # Uncomment the next line to serve media files in dev.

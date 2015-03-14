@@ -1,8 +1,19 @@
 """Common settings and globals."""
 
 
+from __future__ import absolute_import
 from os.path import abspath, basename, dirname, join, normpath
 from sys import path
+
+# Celery settings
+
+BROKER_URL = 'django://'
+
+#: Only add pickle to this list if your broker is secured
+#: from unwanted access (see userguide/security.html)
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
 
 
 ########## PATH CONFIGURATION
@@ -44,23 +55,23 @@ MANAGERS = ADMINS
 ########## DATABASE CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#databases
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.',
-    #     'NAME': '',
-    #     'USER': '',
-    #     'PASSWORD': '',
-    #     'HOST': '',
-    #     'PORT': '',
-    # }
     'default': {
-        'ENGINE': 'django_elasticsearch',
-        'NAME': 'test',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': '',
         'USER': '',
         'PASSWORD': '',
-        'HOST': 'localhost',
-        'PORT': '9200',
-        'SUPPORTS_TRANSACTIONS': False,
-    },
+        'HOST': '',
+        'PORT': '',
+    }
+    # 'default': {
+    #     'ENGINE': 'django_elasticsearch',
+    #     'NAME': 'test',
+    #     'USER': '',
+    #     'PASSWORD': '',
+    #     'HOST': 'localhost',
+    #     'PORT': '9200',
+    #     'SUPPORTS_TRANSACTIONS': False,
+    # },
 }
 ########## END DATABASE CONFIGURATION
 
@@ -204,6 +215,10 @@ DJANGO_APPS = (
 # Apps specific for this project go here.
 LOCAL_APPS = (
     'haystack',
+    # 'chosen',
+    'base',
+    'djcelery',
+    'kombu.transport.django',
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -269,3 +284,5 @@ HAYSTACK_CONNECTIONS = {
         'INDEX_NAME': 'haystack',
     },
 }
+
+CELERY_RESULT_BACKEND = 'djcelery.backends.database:DatabaseBackend'
